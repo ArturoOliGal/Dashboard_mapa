@@ -33,8 +33,14 @@ def mapa_pedregal():
 casas_Ped=mapa_pedregal()
 df = generadore_clientes()
 
-if st.button('Ir al dashboard DENUE'):
-    webbrowser.open_new_tab('https://www.youtube.com')
+st.markdown("""
+    <a href="https://www.youtube.com" target="_blank">
+        <button style="background-color: #4CAF50; border: none; color: white; padding: 10px 20px;
+        text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 5px;">
+            Ir a YouTube
+        </button>
+    </a>
+    """, unsafe_allow_html=True)
 
 filtro_ubi=st.sidebar.multiselect('Filtro',df['Ubicacion'].unique())
 
