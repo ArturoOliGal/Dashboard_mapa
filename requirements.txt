@@ -1,0 +1,8 @@
+streamlit
+folium
+streamlit_folium
+geopy
+pandas
+PIL
+base64
+io
