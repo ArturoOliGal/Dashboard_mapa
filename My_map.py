@@ -11,22 +11,20 @@ from folium.features import CustomIcon
 
 st.set_page_config(layout='wide')
 
+ruta_imagen = "Imagenes\ubicacion.png"  
+
 @st.cache_data
 
 def generadore_clientes():
     url="https://docs.google.com/spreadsheets/d/e/2PACX-1vQUE20irmSfnYGbW0oxCnLe0Vbbtpt-k1X8LMk7c0DWOQDKu92z9mcYOViaJDyVSQ/pubhtml"
     html=pd.read_html(url, header=1)
     df=html[0]
-#    df=df.dropna(subset=['No','CLAVE','UNIDAD','PLACAS', 'OPERADOR LOCAL','PESO UNIDAD','Foraneo/local'])
-#    df = df[['No','CLAVE','UNIDAD','PLACAS', 'OPERADOR LOCAL','PESO UNIDAD','Foraneo/local']]
     return df
     
 def mapa_pedregal():
     url="https://docs.google.com/spreadsheets/d/e/2PACX-1vRcjT15FQ5qZHFrQGO-O7JKHgpmuDzQ8oPZMX8eLQosk1prKKa7rWwab0gUelyAFw/pubhtml"
     html=pd.read_html(url, header=1)
     df=html[0]
-#    df=df.dropna(subset=['No','CLAVE','UNIDAD','PLACAS', 'OPERADOR LOCAL','PESO UNIDAD','Foraneo/local'])
-#    df = df[['No','CLAVE','UNIDAD','PLACAS', 'OPERADOR LOCAL','PESO UNIDAD','Foraneo/local']]
     return df
 
 casas_Ped=mapa_pedregal()
@@ -86,7 +84,6 @@ def convertir_imagen_a_base64(ruta_imagen):
     img_str = base64.b64encode(buffer.getvalue()).decode("utf-8")
     return img_str
 
-ruta_imagen = "\\\\VIODATA\\Tableros Para hacer modificaciones\\Innovacion\\Imagenes\\ubicacion.png"  # Reemplaza con la ruta de la imagen
 imagen_base64 = convertir_imagen_a_base64(ruta_imagen)
 
 icono_html = f'<img src="data:image/png;base64,{imagen_base64}" width="20px" height="20px">'
@@ -124,7 +121,7 @@ def asignar_imagen(tipo):
         return "ruta/a/imagen_hospital.png"
     # Agrega más tipos según sea necesario
     else:
-        return "ruta/a/imagen_default.png"  # Imagen por defecto si no coincide con ningún tipo
+        return "sin imagen"  
 
 
         
@@ -204,7 +201,7 @@ with col2:
     )
 
 
-imagen = Image.open('\\\\VIODATA\\Tableros Para hacer modificaciones\\Innovacion\\Imagenes\\Imagen Pedegral.png')
+imagen = Image.open('Imagenes\Imagen Pedregal.png')
 st.markdown("<h1 style='text-align: center;'>Mapa Pedegral</h1>", unsafe_allow_html=True)
 weights=[2,1]
 col1, col2=st.columns(weights)
