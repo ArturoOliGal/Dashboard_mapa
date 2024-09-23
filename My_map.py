@@ -26,7 +26,7 @@ def mapa_pedregal():
     url="https://docs.google.com/spreadsheets/d/e/2PACX-1vRcjT15FQ5qZHFrQGO-O7JKHgpmuDzQ8oPZMX8eLQosk1prKKa7rWwab0gUelyAFw/pubhtml"
     html=pd.read_html(url, header=1)
     df=html[0]
-    df=df['Numero','Casas habitadas', 'Casas reales']
+    
     return df
 
 casas_Ped=mapa_pedregal()
