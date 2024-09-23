@@ -212,5 +212,5 @@ with col1:
             # caption='Imagen Pedregal',
              use_column_width=True)
 
-#with col2:
-#    st.table(casas_Ped)
+with col2:
+    st.table(casas_Ped)
