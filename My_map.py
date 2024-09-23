@@ -203,7 +203,7 @@ with col2:
     )
 
 
-imagen = Image.open('Imagenes/Imagen Pedregal.png')
+imagen = Image.open('Imagenes/Imagen_Pedregal.png')
 st.markdown("<h1 style='text-align: center;'>Mapa Pedegral</h1>", unsafe_allow_html=True)
 weights=[2,1]
 col1, col2=st.columns(weights)
