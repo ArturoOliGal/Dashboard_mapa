@@ -117,17 +117,6 @@ def obtener_bounds(centro, radio_km):
     oeste = geodesic(kilometers=radio_km).destination(centro, 270).longitude
     return [(sur, oeste), (norte, este)]
 
-def asignar_imagen(tipo):
-    if tipo == "restaurante":
-        return "ruta/a/imagen_restaurante.png"
-    elif tipo == "tienda":
-        return "ruta/a/imagen_tienda.png"
-    elif tipo == "hospital":
-        return "ruta/a/imagen_hospital.png"
-    # Agrega más tipos según sea necesario
-    else:
-        return "sin imagen"  
-
 
         
 mymap = folium.Map(location=centro)
