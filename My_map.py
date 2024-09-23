@@ -1,0 +1,217 @@
+import streamlit as st
+import folium
+from streamlit_folium import folium_static
+from geopy.distance import geodesic
+import pandas as pd
+from PIL import Image
+import base64
+from io import BytesIO
+from folium.plugins import MarkerCluster
+from folium.features import CustomIcon
+
+st.set_page_config(layout='wide')
+
+@st.cache_data
+
+def generadore_clientes():
+    url="https://docs.google.com/spreadsheets/d/e/2PACX-1vQUE20irmSfnYGbW0oxCnLe0Vbbtpt-k1X8LMk7c0DWOQDKu92z9mcYOViaJDyVSQ/pubhtml"
+    html=pd.read_html(url, header=1)
+    df=html[0]
+#    df=df.dropna(subset=['No','CLAVE','UNIDAD','PLACAS', 'OPERADOR LOCAL','PESO UNIDAD','Foraneo/local'])
+#    df = df[['No','CLAVE','UNIDAD','PLACAS', 'OPERADOR LOCAL','PESO UNIDAD','Foraneo/local']]
+    return df
+    
+def mapa_pedregal():
+    url="https://docs.google.com/spreadsheets/d/e/2PACX-1vRcjT15FQ5qZHFrQGO-O7JKHgpmuDzQ8oPZMX8eLQosk1prKKa7rWwab0gUelyAFw/pubhtml"
+    html=pd.read_html(url, header=1)
+    df=html[0]
+#    df=df.dropna(subset=['No','CLAVE','UNIDAD','PLACAS', 'OPERADOR LOCAL','PESO UNIDAD','Foraneo/local'])
+#    df = df[['No','CLAVE','UNIDAD','PLACAS', 'OPERADOR LOCAL','PESO UNIDAD','Foraneo/local']]
+    return df
+
+casas_Ped=mapa_pedregal()
+df = generadore_clientes()
+
+
+filtro_ubi=st.sidebar.multiselect('Filtro',df['Ubicacion'].unique())
+filtro_tipo=st.sidebar.multiselect('Filtro tipo',df['Tipo'].unique())
+filtro_descripsion_sec=st.sidebar.multiselect('Filtro descripción de sectores',df['Descripcion_del_Sector_Economico'].unique())
+
+
+if filtro_ubi:
+    df = df[df['Ubicacion'].isin(filtro_ubi)]
+#    catalogo_suc=catalogo_suc[catalogo_suc['Sucursal'].isin(filtro_ubi)]
+
+if filtro_tipo:
+    df=df[df['Tipo'].isin(filtro_tipo)]
+
+if filtro_descripsion_sec:
+    df=df[df['Descripcion_del_Sector_Economico'].isin(filtro_descripsion_sec)]
+
+df_coordenadas=df[['Nombre Establecimiento','Latitud','Longitud','Tipo']]
+df[['latitud_clus', 'longitud_clus']] = df['Coordenadas'].str.split(',', expand=True)
+df_clusters=df[['latitud_clus','longitud_clus']]
+df_clusters=df_clusters.drop_duplicates()
+latitud_cluster=df_clusters['latitud_clus'].iloc[0]
+longitud_cluster=df_clusters['longitud_clus'].iloc[0]
+centro = (latitud_cluster, longitud_cluster)
+
+mapa = folium.Map(
+    location=[latitud_cluster, longitud_cluster],
+    zoom_start=15,
+    tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    attr='Tiles © Esri — Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+)
+
+folium.Circle(
+    radius=500,  # 0.5 km
+    location=[latitud_cluster, longitud_cluster],
+    color="blue",
+    fill=True,
+    fill_opacity=0.3
+).add_to(mapa)
+
+folium.Circle(
+    radius=1000,  # 1 km
+    location=[latitud_cluster, longitud_cluster],
+    color="blue",
+    fill=True,
+    fill_opacity=0.2
+).add_to(mapa)
+
+def convertir_imagen_a_base64(ruta_imagen):
+    img = Image.open(ruta_imagen)
+    buffer = BytesIO()
+    img.save(buffer, format="PNG")
+    img_str = base64.b64encode(buffer.getvalue()).decode("utf-8")
+    return img_str
+
+ruta_imagen = "\\\\VIODATA\\Tableros Para hacer modificaciones\\Innovacion\\Imagenes\\ubicacion.png"  # Reemplaza con la ruta de la imagen
+imagen_base64 = convertir_imagen_a_base64(ruta_imagen)
+
+icono_html = f'<img src="data:image/png;base64,{imagen_base64}" width="20px" height="20px">'
+icono = folium.DivIcon(html=icono_html)
+
+folium.Marker(location=[latitud_cluster, longitud_cluster], icon=icono).add_to(mapa)
+st.markdown("<h1 style='text-align: center;'>Mapa satelital</h1>", unsafe_allow_html=True)
+weights=[1,2,1]
+col1, col2, col3=st.columns(weights)
+with col2:
+    st_data = folium_static(mapa, width=725)
+
+
+def asignar_color(tipo):
+    if tipo == 'Clientes':
+        return 'green'
+    elif tipo == 'Generador':
+        return 'lightblue'
+    else:
+        return 'red'
+
+def obtener_bounds(centro, radio_km):
+    norte = geodesic(kilometers=radio_km).destination(centro, 0).latitude
+    sur = geodesic(kilometers=radio_km).destination(centro, 180).latitude
+    este = geodesic(kilometers=radio_km).destination(centro, 90).longitude
+    oeste = geodesic(kilometers=radio_km).destination(centro, 270).longitude
+    return [(sur, oeste), (norte, este)]
+
+def asignar_imagen(tipo):
+    if tipo == "restaurante":
+        return "ruta/a/imagen_restaurante.png"
+    elif tipo == "tienda":
+        return "ruta/a/imagen_tienda.png"
+    elif tipo == "hospital":
+        return "ruta/a/imagen_hospital.png"
+    # Agrega más tipos según sea necesario
+    else:
+        return "ruta/a/imagen_default.png"  # Imagen por defecto si no coincide con ningún tipo
+
+
+        
+mymap = folium.Map(location=centro)
+radio_km = 1 * 1000 
+folium.Circle(location=centro, radius=radio_km, color=None, fill=True, fill_color="blue",fill_opacity=0.4).add_to(mymap)
+radio_km = 1 * 500 
+folium.Circle(location=centro, radius=radio_km, color=None, fill=True, fill_color="blue",fill_opacity=0.6).add_to(mymap)
+bounds = obtener_bounds(centro, 1) 
+mymap.fit_bounds(bounds)
+
+for index, row in df_coordenadas.iterrows():
+    folium.CircleMarker(
+       location=(row['Latitud'], row['Longitud']),
+        radius=8, 
+        color=asignar_color(row['Tipo']),
+        fill=True, 
+        fill_color=asignar_color(row['Tipo']),  
+        fill_opacity=0.8,
+        tooltip=folium.Tooltip(f"Establecimiento:{row['Nombre Establecimiento']}<br>Latitud: {row['Latitud']}<br>Longitud: {row['Longitud']}<br>Tipo: {row['Tipo']}")
+    ).add_to(mymap)
+
+
+#for index, row in df.iterrows():
+#    icono_imagen = CustomIcon(
+#        icon_image=row['Ruta Imagen'],  # Usar la ruta de imagen asignada en el Excel
+#        icon_size=(30, 30)  # Ajustar el tamaño de la imagen
+#    )
+#    
+#    # Crear un marcador con la imagen
+#    folium.Marker(
+#        location=(row['Latitud'], row['Longitud']),
+#        icon=icono_imagen,
+#        tooltip=folium.Tooltip(f"Establecimiento: {row['Nombre Establecimiento']}<br>Latitud: {row['Latitud']}<br>Longitud: {row['Longitud']}<br>Tipo: {row['Tipo']}")
+#    ).add_to(mymap)
+
+
+st.markdown("<h1 style='text-align: center;'>Mapa</h1>", unsafe_allow_html=True)
+num_clientes = df[df['Tipo'] == 'Clientes'].shape[0]
+num_generadores = df[df['Tipo'] == 'Generador'].shape[0]
+num_competencia = df[df['Tipo'] == 'Competencia'].shape[0]
+weights=[1,1]
+col1, col2=st.columns(weights)
+with col1:
+    
+    folium_static(mymap)
+
+with col2:
+    st.markdown(
+    f"""
+    <div style="background-color: lightgreen; padding: 20px; border-radius: 15px;">
+        <h4 style="text-align: center;">Clientes</h4>
+        <p style="font-size: 24px; font-weight: bold; text-align: center;">{num_clientes}</p>
+    </div>
+    """,
+    unsafe_allow_html=True
+    )
+    st.markdown("")
+    st.markdown(
+    f"""
+    <div style="background-color: lightblue; padding: 20px; border-radius: 15px;">
+        <h4 style="text-align: center;">Generadores</h4>
+        <p style="font-size: 24px; font-weight: bold; text-align: center;">{num_generadores}</p>
+    </div>
+    """,
+    unsafe_allow_html=True
+    )
+    st.markdown("")
+    st.markdown(
+        f"""
+    <div style="background-color: #e60000; padding: 20px; border-radius: 15px;">
+        <h4 style="text-align: center;">Competencia</h4>
+        <p style="font-size: 24px; font-weight: bold; text-align: center;">{num_competencia}</p>
+    </div>
+    """,
+    unsafe_allow_html=True
+    )
+
+
+imagen = Image.open('\\\\VIODATA\\Tableros Para hacer modificaciones\\Innovacion\\Imagenes\\Imagen Pedegral.png')
+st.markdown("<h1 style='text-align: center;'>Mapa Pedegral</h1>", unsafe_allow_html=True)
+weights=[2,1]
+col1, col2=st.columns(weights)
+with col1:
+    st.image(imagen, 
+            # caption='Imagen Pedregal',
+             use_column_width=True)
+
+#with col2:
+#    st.table(casas_Ped)
