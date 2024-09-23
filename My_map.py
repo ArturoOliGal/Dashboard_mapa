@@ -32,7 +32,7 @@ def mapa_pedregal():
 
 casas_Ped=mapa_pedregal()
 df = generadore_clientes()
-weights=[2,1,1]
+weights=[1.5,1,1]
 col1, col2, col3=st.columns(weights)
 
 with col2:
