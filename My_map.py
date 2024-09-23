@@ -32,6 +32,8 @@ def mapa_pedregal():
 casas_Ped=mapa_pedregal()
 df = generadore_clientes()
 
+if st.button('Ir a YouTube'):
+    webbrowser.open_new_tab('https://www.youtube.com')
 
 filtro_ubi=st.sidebar.multiselect('Filtro',df['Ubicacion'].unique())
 
