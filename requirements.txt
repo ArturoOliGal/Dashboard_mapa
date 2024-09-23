@@ -4,5 +4,4 @@ streamlit_folium
 geopy
 pandas
 Pillow
-base64
 io
