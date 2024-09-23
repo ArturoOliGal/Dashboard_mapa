@@ -36,7 +36,7 @@ df = generadore_clientes()
 st.markdown("""
     <a href="https://app.powerbi.com/groups/4c07734f-f271-4be1-903b-cfa6cb10c07c/reports/2eb52716-7702-4c09-aefd-c6c2fe07e3ed/3757ea1fa3d08184590d?experience=power-bi" target="_blank">
         <button style="background-color: #4CAF50; border: none; color: white; padding: 10px 20px;
-        text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 5px;">
+        text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 5px; align: center">
             Ir al powerBI
         </button>
     </a>
