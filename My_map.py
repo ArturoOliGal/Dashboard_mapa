@@ -8,6 +8,7 @@ import base64
 from io import BytesIO
 from folium.plugins import MarkerCluster
 from folium.features import CustomIcon
+import webbrowser
 
 st.set_page_config(layout='wide')
 
@@ -32,7 +33,7 @@ def mapa_pedregal():
 casas_Ped=mapa_pedregal()
 df = generadore_clientes()
 
-if st.button('Ir a YouTube'):
+if st.button('Ir al dashboard DENUE'):
     webbrowser.open_new_tab('https://www.youtube.com')
 
 filtro_ubi=st.sidebar.multiselect('Filtro',df['Ubicacion'].unique())
