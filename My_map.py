@@ -213,4 +213,4 @@ with col1:
              use_column_width=True)
 
 with col2:
-    st.table(casas_Ped)
+    st.(casas_Ped)
