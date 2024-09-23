@@ -34,16 +34,18 @@ df = generadore_clientes()
 
 
 filtro_ubi=st.sidebar.multiselect('Filtro',df['Ubicacion'].unique())
-filtro_tipo=st.sidebar.multiselect('Filtro tipo',df['Tipo'].unique())
-filtro_descripsion_sec=st.sidebar.multiselect('Filtro descripción de sectores',df['Descripcion_del_Sector_Economico'].unique())
-
 
 if filtro_ubi:
     df = df[df['Ubicacion'].isin(filtro_ubi)]
 #    catalogo_suc=catalogo_suc[catalogo_suc['Sucursal'].isin(filtro_ubi)]
 
+filtro_tipo=st.sidebar.multiselect('Filtro tipo',df['Tipo'].unique())
+
 if filtro_tipo:
     df=df[df['Tipo'].isin(filtro_tipo)]
+
+filtro_descripsion_sec=st.sidebar.multiselect('Filtro descripción de sectores',df['Descripcion_del_Sector_Economico'].unique())
+
 
 if filtro_descripsion_sec:
     df=df[df['Descripcion_del_Sector_Economico'].isin(filtro_descripsion_sec)]
