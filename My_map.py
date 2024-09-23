@@ -12,6 +12,7 @@ from folium.features import CustomIcon
 st.set_page_config(layout='wide')
 
 ruta_imagen = "Imagenes/ubicacion.png"  
+ruta_mapa="Imagenes/Imagen Pedregal.png"
 
 @st.cache_data
 
@@ -78,6 +79,7 @@ folium.Circle(
 ).add_to(mapa)
 
 def convertir_imagen_a_base64(ruta_imagen):
+
     img = Image.open(ruta_imagen)
     buffer = BytesIO()
     img.save(buffer, format="PNG")
@@ -201,7 +203,7 @@ with col2:
     )
 
 
-imagen = Image.open('Imagenes\ImagenPedregal.png')
+imagen = Image.open('Imagenes/Imagen Pedregal.png')
 st.markdown("<h1 style='text-align: center;'>Mapa Pedegral</h1>", unsafe_allow_html=True)
 weights=[2,1]
 col1, col2=st.columns(weights)
