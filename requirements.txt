@@ -3,6 +3,6 @@ folium
 streamlit_folium
 geopy
 pandas
-PIL
+Pillow
 base64
 io
