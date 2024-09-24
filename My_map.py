@@ -53,8 +53,6 @@ st.markdown("""
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zM4.646 8.354a.5.5 0 1 1 .708-.708L7.5 9.793V5.5a.5.5 0 0 1 1 0v4.293l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3z"/>
             </svg>
-            <!-- Texto del botón -->
-            &nbsp;Volver a Power BI&nbsp;
             <!-- Icono de gráfico de barras -->
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-bar-chart-fill" viewBox="0 0 16 16">
                 <path d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h2zm4 3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h2zM3 8a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2z"/>
