@@ -230,7 +230,7 @@ with col2:
     casas_Ped
 
 st.markdown("""
-    <footer style ="text-align: center; position: fixed">
+    <footer style ="text-align: center; position: fixed; background-color: black">
         <a href="#top">
             
         <i class="bi bi-arrow-up-circle"></i>
