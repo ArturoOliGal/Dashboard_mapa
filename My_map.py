@@ -47,7 +47,7 @@ df = generadore_clientes()
 #        </a>
 #        """, unsafe_allow_html=True)
 st.markdown("""
-    <front>
+    <aside>
         <a href="https://app.powerbi.com/groups/4c07734f-f271-4be1-903b-cfa6cb10c07c/reports/2eb52716-7702-4c09-aefd-c6c2fe07e3ed/3757ea1fa3d08184590d?experience=power-bi" target="_blank" style="text-decoration: none;">
             <button style="position: fixed; background-color: #f2c811; border: none; color: black; padding: 10px 20px; text-align: center; display: inline-block; font-size: 16px; border-radius: 5px;">
                 <!-- Icono de flecha izquierda -->
@@ -60,7 +60,7 @@ st.markdown("""
                 </svg>
             </button>
         </a>
-    </front>
+    </aside>
     """, unsafe_allow_html=True)
 filtro_ubi=st.sidebar.multiselect('Filtro',df['Ubicacion'].unique())
 
