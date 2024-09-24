@@ -204,23 +204,16 @@ with col2:
     unsafe_allow_html=True
     )
     st.markdown("")
-st.markdown(
-    f"""
-    <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px;">
-        <!--Competencia -->
-        <div style="background-color: #e60000; padding: 20px; border-radius: 15px; flex: 1; min-width: 250px;">
-            <h4 style="text-align: center;">Competencia</h4>
-            <p style="font-size: 24px; font-weight: bold; text-align: center;">{num_competencia}</p>
-        </div>
-        
-#        <!-- Aquí puedes agregar la imagen al lado -->
-#        <div style="background-color: #ffffff; padding: 20px; border-radius: 15px; flex: 1; min-width: 250px;">
-#            <h4 style="text-align: center;">Imagen o contenido adicional</h4>
-#            <img src="https://via.placeholder.com/150" alt="imagen" style="display: block; margin-left: auto; margin-right: auto;">
-#        </div>
-    </div>
-    """,
-    unsafe_allow_html=True
+    st.markdown(
+        f"""
+        <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px;">
+            <!--Competencia -->
+            <div style="background-color: #e60000; padding: 20px; border-radius: 15px; flex: 1; min-width: 250px;">
+                <h4 style="text-align: center;">Competencia</h4>
+                <p style="font-size: 24px; font-weight: bold; text-align: center;">{num_competencia}</p>
+            </div>
+        """,
+        unsafe_allow_html=True
 )
 
 
