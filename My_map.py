@@ -228,17 +228,11 @@ with col1:
 with col2:
     casas_Ped
 
-scroll_button = """
+st.markdown("""
     <a href="#top">
         <button style="position: fixed; bottom: 10px; right: 10px; background-color: #4CAF50; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; font-size: 16px; border-radius: 5px;">
             Ir Arriba
         </button>
     </a>
-    <script>
-        document.querySelector('a[href="#top"]').addEventListener('click', function(event) {
-            event.preventDefault();
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        });
-    </script>
-"""
-st.markdown(scroll_button, unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
+st.markdown('<div id="top"></div>', unsafe_allow_html=True)
