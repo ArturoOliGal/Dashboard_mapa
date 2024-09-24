@@ -178,12 +178,13 @@ num_clientes = df[df['Tipo'] == 'Clientes'].shape[0]
 num_generadores = df[df['Tipo'] == 'Generador'].shape[0]
 num_competencia = df[df['Tipo'] == 'Competencia'].shape[0]
 
-col1, col2=st.columns(2)
+weights=[2,0.5,1]
+col1, col2, col3=st.columns(weights)
 with col1:
     
     folium_static(mymap)
 
-with col2:
+with col3:
     st.markdown(
     f"""
     <div style="background-color: lightgreen; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
