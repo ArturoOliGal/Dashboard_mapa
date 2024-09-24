@@ -178,7 +178,7 @@ num_clientes = df[df['Tipo'] == 'Clientes'].shape[0]
 num_generadores = df[df['Tipo'] == 'Generador'].shape[0]
 num_competencia = df[df['Tipo'] == 'Competencia'].shape[0]
 
-weights=[2,1,1]
+weights=[2,2,1]
 col1, col2, col3=st.columns(weights)
 with col1:
     
