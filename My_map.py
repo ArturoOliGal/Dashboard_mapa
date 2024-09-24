@@ -12,6 +12,7 @@ from pathlib import Path
 
 icon_path = Path("Imagenes/Isotipo_Super.png")
 st.set_page_config(page_title="DENUE dashboard", page_icon=str(icon_path),layout='wide')
+st.markdown('<div id="top"></div>', unsafe_allow_html=True)
 
 ruta_imagen = "Imagenes/ubicacion.png"  
 ruta_mapa="Imagenes/Imagen Pedregal.png"
@@ -235,4 +236,3 @@ st.markdown("""
         </button>
     </a>
     """, unsafe_allow_html=True)
-st.markdown('<div id="top"></div>', unsafe_allow_html=True)
