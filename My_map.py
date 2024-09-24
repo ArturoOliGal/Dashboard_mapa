@@ -237,7 +237,7 @@ with col2:
 st.markdown("""
      <footer style ="text-align: center">
          <a href="#top">
-             <ratio button style="position: fixed; bottom: 10px; center: 10px; background-color: transparent; border: none; color: white; padding: 20px 10px; text-align: center; text-decoration: none; font-size: 16px; border-radius: 5px;">
+             <ratio button style="position: fixed; bottom: 10px; center: 10px; background-color: transparent; border: black; color: white; padding: 20px 10px; text-align: center; text-decoration: none; font-size: 16px; border-radius: 5px;">
                  <i class="bi bi-arrow-up-circle"></i>
                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-arrow-up-circle" viewBox="0 0 16 16">
                          <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
