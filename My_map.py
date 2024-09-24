@@ -186,7 +186,7 @@ with col1:
 with col2:
     st.markdown(
     f"""
-    <div style="background-color: lightgreen; padding: 20px; border-radius: 15px;">
+    <div style="background-color: lightgreen; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
         <h4 style="text-align: center;">Clientes</h4>
         <p style="font-size: 24px; font-weight: bold; text-align: center;">{num_clientes}</p>
     </div>
@@ -194,9 +194,10 @@ with col2:
     unsafe_allow_html=True
     )
     st.markdown("")
+
     st.markdown(
     f"""
-    <div style="background-color: lightblue; padding: 20px; border-radius: 15px;">
+    <div style="background-color: lightblue; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
         <h4 style="text-align: center;">Generadores</h4>
         <p style="font-size: 24px; font-weight: bold; text-align: center;">{num_generadores}</p>
     </div>
@@ -204,18 +205,16 @@ with col2:
     unsafe_allow_html=True
     )
     st.markdown("")
-    st.markdown(
-        f"""
-        <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px;">
-            <!--Competencia -->
-            <div style="background-color: #e60000; padding: 20px; border-radius: 15px; flex: 1; min-width: 250px;">
-                <h4 style="text-align: center;">Competencia</h4>
-                <p style="font-size: 24px; font-weight: bold; text-align: center;">{num_competencia}</p>
-            </div>
-        """,
-        unsafe_allow_html=True
-)
 
+    st.markdown(
+    f"""
+    <div style="background-color: #e60000; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
+        <h4 style="text-align: center;">Competencia</h4>
+        <p style="font-size: 24px; font-weight: bold; text-align: center;">{num_competencia}</p>
+    </div>
+    """,
+    unsafe_allow_html=True
+    )
 
 imagen = Image.open('Imagenes/Imagen_Pedregal.png')
 st.markdown("<h1 style='text-align: center;'>Mapa Pedegral</h1>", unsafe_allow_html=True)
