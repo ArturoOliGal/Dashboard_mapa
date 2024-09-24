@@ -8,7 +8,6 @@ import base64
 from io import BytesIO
 from folium.plugins import MarkerCluster
 from folium.features import CustomIcon
-import webbrowser
 
 st.set_page_config(layout='wide')
 
