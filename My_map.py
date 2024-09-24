@@ -230,9 +230,11 @@ with col2:
     casas_Ped
 
 st.markdown("""
-    <a href="#top">
-        <button style="position: fixed; bottom: 10px; center: 10px; background-color: #4CAF50; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; font-size: 16px; border-radius: 5px;">
-            Ir Arriba
-        </button>
-    </a>
+    <footer>
+        <a href="#top">
+            <button style="position: fixed; bottom: 10px; center: 10px; background-color: #4CAF50; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; font-size: 16px; border-radius: 5px;">
+                Ir Arriba
+            </button>
+        </a>
+    </footer>    
     """, unsafe_allow_html=True)
