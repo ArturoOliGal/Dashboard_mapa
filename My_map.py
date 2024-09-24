@@ -13,8 +13,6 @@ from pathlib import Path
 icon_path = Path("Imagenes/Isotipo_Super.png")
 st.set_page_config(page_title="DENUE dashboard", page_icon=str(icon_path),layout='wide')
 
-#st.set_page_config(layout='wide')
-
 ruta_imagen = "Imagenes/ubicacion.png"  
 ruta_mapa="Imagenes/Imagen Pedregal.png"
 
@@ -140,8 +138,7 @@ def obtener_bounds(centro, radio_km):
     oeste = geodesic(kilometers=radio_km).destination(centro, 270).longitude
     return [(sur, oeste), (norte, este)]
 
-
-        
+    
 mymap = folium.Map(location=centro)
 radio_km = 1 * 1000 
 folium.Circle(location=centro, radius=radio_km, color=None, fill=True, fill_color="blue",fill_opacity=0.4).add_to(mymap)
@@ -174,7 +171,6 @@ for index, row in df_coordenadas.iterrows():
 #        icon=icono_imagen,
 #        tooltip=folium.Tooltip(f"Establecimiento: {row['Nombre Establecimiento']}<br>Latitud: {row['Latitud']}<br>Longitud: {row['Longitud']}<br>Tipo: {row['Tipo']}")
 #    ).add_to(mymap)
-
 
 st.markdown("<h1 style='text-align: center;'>Mapa</h1>", unsafe_allow_html=True)
 num_clientes = df[df['Tipo'] == 'Clientes'].shape[0]
