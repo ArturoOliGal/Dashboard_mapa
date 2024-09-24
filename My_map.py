@@ -11,7 +11,7 @@ from folium.features import CustomIcon
 from pathlib import Path
 
 icon_path = Path("Imagenes/Isotipo_Super.png")
-st.set_page_config(page_title="DENUE dashboard", page_icon=icon_path)
+st.set_page_config(page_title="DENUE dashboard", page_icon=str(icon_path))
 
 st.set_page_config(layout='wide')
 
