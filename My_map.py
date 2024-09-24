@@ -48,11 +48,11 @@ df = generadore_clientes()
 #        """, unsafe_allow_html=True)
 st.markdown("""
     <a href="https://app.powerbi.com/groups/4c07734f-f271-4be1-903b-cfa6cb10c07c/reports/2eb52716-7702-4c09-aefd-c6c2fe07e3ed/3757ea1fa3d08184590d?experience=power-bi" target="_blank">
-        <i class="bi bi-bar-chart-fill"></i>
+        <i class="bi bi-bar-chart-fill; bi bi-arrow-left-circle"></i>
             <button style="background-color: transparent; border: none; color: black; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 5px;">
                 Ir al PowerBI
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="Black" class="bi bi-bar-chart-fill" viewBox="0 0 16 16">
-                    <path d="M1 11a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1z"/>        
+                <svg xmlns="http://www.w3.org/2000/svg; http://www.w3.org/2000/svg" width="16" height="16" fill="Black" class="bi bi-bar-chart-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"; d="M1 11a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1z; M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>        
                 </svg>     
             </button>
     </a>
