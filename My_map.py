@@ -206,7 +206,7 @@ with col2:
     st.markdown("")
     st.markdown(
         f"""
-    <div style="background-color: #e60000; padding: 20px; border-radius: 15px;">
+    <div style="background-color: #e60000; padding: 10px; border-radius: 15px;">
         <h4 style="text-align: center;">Competencia</h4>
         <p style="font-size: 24px; font-weight: bold; text-align: center;">{num_competencia}</p>
     </div>
