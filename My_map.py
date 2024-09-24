@@ -50,7 +50,7 @@ st.markdown("""
     <a href="https://app.powerbi.com/groups/4c07734f-f271-4be1-903b-cfa6cb10c07c/reports/2eb52716-7702-4c09-aefd-c6c2fe07e3ed/3757ea1fa3d08184590d?experience=power-bi" target="_blank" style="text-decoration: none;">
         <button style="background-color: transparent; border: none; color: black; padding: 10px 20px; text-align: center; display: inline-block; font-size: 16px; border-radius: 5px;">
             <!-- Icono de flecha izquierda -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-arrow-left" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zM4.646 8.354a.5.5 0 1 1 .708-.708L7.5 9.793V5.5a.5.5 0 0 1 1 0v4.293l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3z"/>
             </svg>
             <!-- Icono de gráfico de barras -->
