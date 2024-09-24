@@ -177,8 +177,8 @@ st.markdown("<h1 style='text-align: center;'>Mapa</h1>", unsafe_allow_html=True)
 num_clientes = df[df['Tipo'] == 'Clientes'].shape[0]
 num_generadores = df[df['Tipo'] == 'Generador'].shape[0]
 num_competencia = df[df['Tipo'] == 'Competencia'].shape[0]
-weights=[1,1]
-col1, col2=st.columns(weights)
+
+col1, col2=st.columns(2)
 with col1:
     
     folium_static(mymap)
