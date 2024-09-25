@@ -144,7 +144,13 @@ def obtener_bounds(centro, radio_km):
     oeste = geodesic(kilometers=radio_km).destination(centro, 270).longitude
     return [(sur, oeste), (norte, este)]
 
-    
+
+def filtrar_por_distancia(df, centro, radio_metros):
+    return df[df.apply(lambda row: geodesic(centro, (row['Latitud'], row['Longitud'])).meters <= radio_metros, axis=1)]
+
+def filtrar_por_distancia_rango(df, centro, radio_min_metros, radio_max_metros):
+    return df[df.apply(lambda row: radio_min_metros < geodesic(centro, (row['Latitud'], row['Longitud'])).meters <= radio_max_metros, axis=1)]   
+
 mymap = folium.Map(location=centro)
 radio_km = 1 * 1000 
 folium.Circle(location=centro, radius=radio_km, color=None, fill=True, fill_color="blue",fill_opacity=0.4).add_to(mymap)
@@ -153,30 +159,58 @@ folium.Circle(location=centro, radius=radio_km, color=None, fill=True, fill_colo
 bounds = obtener_bounds(centro, 1) 
 mymap.fit_bounds(bounds)
 
-for index, row in df_coordenadas.iterrows():
-    folium.CircleMarker(
-       location=(row['Latitud'], row['Longitud']),
-        radius=8, 
-        color=asignar_color(row['Tipo']),
-        fill=True, 
-        fill_color=asignar_color(row['Tipo']),  
-        fill_opacity=0.8,
-        tooltip=folium.Tooltip(f"Establecimiento:{row['Nombre Establecimiento']}<br>Latitud: {row['Latitud']}<br>Longitud: {row['Longitud']}<br>Tipo: {row['Tipo']}")
-    ).add_to(mymap)
-
-
-#for index, row in df.iterrows():
-#    icono_imagen = CustomIcon(
-#        icon_image=row['Ruta Imagen'],  # Usar la ruta de imagen asignada en el Excel
-#        icon_size=(30, 30)  # Ajustar el tamaño de la imagen
-#    )
-#    
-#    # Crear un marcador con la imagen
-#    folium.Marker(
-#        location=(row['Latitud'], row['Longitud']),
-#        icon=icono_imagen,
-#        tooltip=folium.Tooltip(f"Establecimiento: {row['Nombre Establecimiento']}<br>Latitud: {row['Latitud']}<br>Longitud: {row['Longitud']}<br>Tipo: {row['Tipo']}")
+#for index, row in df_coordenadas.iterrows():
+#    folium.CircleMarker(
+#       location=(row['Latitud'], row['Longitud']),
+#        radius=8, 
+#        color=asignar_color(row['Tipo']),
+#        fill=True, 
+#        fill_color=asignar_color(row['Tipo']),  
+#        fill_opacity=0.8,
+#        tooltip=folium.Tooltip(f"Establecimiento:{row['Nombre Establecimiento']}<br>Latitud: {row['Latitud']}<br>Longitud: {row['Longitud']}<br>Tipo: {row['Tipo']}")
 #    ).add_to(mymap)
+
+
+filtro_ubi = st.multiselect('Filtro', ['1 km', '500 mts', 'todo'])
+
+if filtro_ubi:
+    if '1 km' in filtro_ubi:
+        df_coordenadas = filtrar_por_distancia_rango(df_coordenadas, centro, 500, 1000)
+        for index, row in df_coordenadas.iterrows():
+            folium.CircleMarker(
+                location=(row['Latitud'], row['Longitud']),
+                radius=8,
+                color=asignar_color(row['Tipo']),
+                fill=True,
+                fill_color=asignar_color(row['Tipo']),
+                fill_opacity=0.8,
+                tooltip=folium.Tooltip(f"Establecimiento: {row['Nombre Establecimiento']}<br>Latitud: {row['Latitud']}<br>Longitud: {row['Longitud']}<br>Tipo: {row['Tipo']}")
+            ).add_to(mymap)
+    
+    if '500 mts' in filtro_ubi:
+        df_coordenadas = filtrar_por_distancia(df_coordenadas, centro, 500)
+        for index, row in df_coordenadas.iterrows():
+            folium.CircleMarker(
+                location=(row['Latitud'], row['Longitud']),
+                radius=8,
+                color=asignar_color(row['Tipo']),
+                fill=True,
+                fill_color=asignar_color(row['Tipo']),
+                fill_opacity=0.8,
+                tooltip=folium.Tooltip(f"Establecimiento: {row['Nombre Establecimiento']}<br>Latitud: {row['Latitud']}<br>Longitud: {row['Longitud']}<br>Tipo: {row['Tipo']}")
+            ).add_to(mymap)
+    
+    if 'todo' in filtro_ubi:
+        for index, row in df_coordenadas.iterrows():
+            folium.CircleMarker(
+                location=(row['Latitud'], row['Longitud']),
+                radius=8,
+                color=asignar_color(row['Tipo']),
+                fill=True,
+                fill_color=asignar_color(row['Tipo']),
+                fill_opacity=0.8,
+                tooltip=folium.Tooltip(f"Establecimiento: {row['Nombre Establecimiento']}<br>Latitud: {row['Latitud']}<br>Longitud: {row['Longitud']}<br>Tipo: {row['Tipo']}")
+            ).add_to(mymap)
 
 st.markdown("<h1 style='text-align: center;'>Mapa</h1>", unsafe_allow_html=True)
 num_clientes = df[df['Tipo'] == 'Clientes'].shape[0]
