@@ -213,9 +213,9 @@ if filtro_ubi:
             ).add_to(mymap)
 
 st.markdown("<h1 style='text-align: center;'>Mapa</h1>", unsafe_allow_html=True)
-num_clientes = df[df['Tipo'] == 'Clientes'].shape[0]
-num_generadores = df[df['Tipo'] == 'Generador'].shape[0]
-num_competencia = df[df['Tipo'] == 'Competencia'].shape[0]
+num_clientes = df_coordenadas[df_coordenadas['Tipo'] == 'Clientes'].shape[0]
+num_generadores = df_coordenadas[df_coordenadas['Tipo'] == 'Generador'].shape[0]
+num_competencia = df_coordenadas[df_coordenadas['Tipo'] == 'Competencia'].shape[0]
 
 weights=[3,2,1]
 col1, col2, col3=st.columns(weights)
