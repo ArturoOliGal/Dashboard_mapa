@@ -173,8 +173,8 @@ mymap.fit_bounds(bounds)
 
 filtro_km = st.multiselect('Filtro por km', ['1 km', '500 mts', 'todo'])
 
-if filtro_ubi:
-    if '1 km' in filtro_ubi:
+if filtro_km:
+    if '1 km' in filtro_km:
         df_coordenadas = filtrar_por_distancia_rango(df_coordenadas, centro, 500, 1000)
         for index, row in df_coordenadas.iterrows():
             folium.CircleMarker(
@@ -187,7 +187,7 @@ if filtro_ubi:
                 tooltip=folium.Tooltip(f"Establecimiento: {row['Nombre Establecimiento']}<br>Latitud: {row['Latitud']}<br>Longitud: {row['Longitud']}<br>Tipo: {row['Tipo']}")
             ).add_to(mymap)
     
-    if '500 mts' in filtro_ubi:
+    if '500 mts' in filtro_km:
         df_coordenadas = filtrar_por_distancia(df_coordenadas, centro, 500)
         for index, row in df_coordenadas.iterrows():
             folium.CircleMarker(
@@ -200,7 +200,7 @@ if filtro_ubi:
                 tooltip=folium.Tooltip(f"Establecimiento: {row['Nombre Establecimiento']}<br>Latitud: {row['Latitud']}<br>Longitud: {row['Longitud']}<br>Tipo: {row['Tipo']}")
             ).add_to(mymap)
     
-    if 'todo' in filtro_ubi:
+    if 'todo' in filtro_km:
         for index, row in df_coordenadas.iterrows():
             folium.CircleMarker(
                 location=(row['Latitud'], row['Longitud']),
