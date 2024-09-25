@@ -152,9 +152,9 @@ def filtrar_por_distancia_rango(df, centro, radio_min_metros, radio_max_metros):
     return df[df.apply(lambda row: radio_min_metros < geodesic(centro, (row['Latitud'], row['Longitud'])).meters <= radio_max_metros, axis=1)]   
 
 mymap = folium.Map(location=centro)
-radio_km = 1 * 1000 
+radio_km = 1000 
 folium.Circle(location=centro, radius=radio_km, color=None, fill=True, fill_color="blue",fill_opacity=0.4).add_to(mymap)
-radio_km = 1 * 500 
+radio_km = 500 
 folium.Circle(location=centro, radius=radio_km, color=None, fill=True, fill_color="blue",fill_opacity=0.6).add_to(mymap)
 bounds = obtener_bounds(centro, 1) 
 mymap.fit_bounds(bounds)
