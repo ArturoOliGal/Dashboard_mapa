@@ -246,3 +246,8 @@ st.markdown("""
          </a>
      </footer>    
  """, unsafe_allow_html=True)
+
+ #Navegacion entre pestañas Regresar una pestaña atras a la actual ¿Es posible?
+st.components.v1.html("""
+                        <button onclick="window.history.back()">Volver a la página anterior</button>
+                    """)
