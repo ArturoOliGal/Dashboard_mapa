@@ -159,22 +159,21 @@ folium.Circle(location=centro, radius=radio_km, color=None, fill=True, fill_colo
 bounds = obtener_bounds(centro, 1) 
 mymap.fit_bounds(bounds)
 
-#for index, row in df_coordenadas.iterrows():
-#    folium.CircleMarker(
-#       location=(row['Latitud'], row['Longitud']),
-#        radius=8, 
-#        color=asignar_color(row['Tipo']),
-#        fill=True, 
-#        fill_color=asignar_color(row['Tipo']),  
-#        fill_opacity=0.8,
-#        tooltip=folium.Tooltip(f"Establecimiento:{row['Nombre Establecimiento']}<br>Latitud: {row['Latitud']}<br>Longitud: {row['Longitud']}<br>Tipo: {row['Tipo']}")
-#    ).add_to(mymap)
 
+if 'selected_buttons' not in st.session_state:
+    st.session_state.selected_buttons = []
 
-filtro_km = st.multiselect('Filtro por km', ['1 km', '500 mts', 'todo'])
+def select_button(button_id):
+    if button_id == 'btn3':  
+        st.session_state.selected_buttons = ['btn3'] 
+    else:
+        st.session_state.selected_buttons = [button_id] 
 
-if filtro_km:
-    if '1 km' in filtro_km:
+col1, col2, col3 = st.columns(3)
+
+with col2:
+    if 'btn1' in st.session_state.selected_buttons:
+        st.button('1 km', key='btn1', on_click=select_button, args=('btn1',), use_container_width=True, disabled=False)
         df_coordenadas = filtrar_por_distancia_rango(df_coordenadas, centro, 500, 1000)
         for index, row in df_coordenadas.iterrows():
             folium.CircleMarker(
@@ -186,8 +185,12 @@ if filtro_km:
                 fill_opacity=0.8,
                 tooltip=folium.Tooltip(f"Establecimiento: {row['Nombre Establecimiento']}<br>Latitud: {row['Latitud']}<br>Longitud: {row['Longitud']}<br>Tipo: {row['Tipo']}")
             ).add_to(mymap)
-    
-    if '500 mts' in filtro_km:
+    else:
+        st.button('1 km', key='btn1', on_click=select_button, args=('btn1',), use_container_width=True)
+
+with col1:
+    if 'btn2' in st.session_state.selected_buttons:
+        st.button('500 mts', key='btn2', on_click=select_button, args=('btn2',), use_container_width=True, disabled=False)
         df_coordenadas = filtrar_por_distancia(df_coordenadas, centro, 500)
         for index, row in df_coordenadas.iterrows():
             folium.CircleMarker(
@@ -199,8 +202,12 @@ if filtro_km:
                 fill_opacity=0.8,
                 tooltip=folium.Tooltip(f"Establecimiento: {row['Nombre Establecimiento']}<br>Latitud: {row['Latitud']}<br>Longitud: {row['Longitud']}<br>Tipo: {row['Tipo']}")
             ).add_to(mymap)
-    
-    if 'todo' in filtro_km:
+    else:
+        st.button('500 mts', key='btn2', on_click=select_button, args=('btn2',), use_container_width=True)
+
+with col3:
+    if 'btn3' in st.session_state.selected_buttons:
+        st.button('Todo', key='btn3', on_click=select_button, args=('btn3',), use_container_width=True, disabled=False)
         for index, row in df_coordenadas.iterrows():
             folium.CircleMarker(
                 location=(row['Latitud'], row['Longitud']),
@@ -211,6 +218,12 @@ if filtro_km:
                 fill_opacity=0.8,
                 tooltip=folium.Tooltip(f"Establecimiento: {row['Nombre Establecimiento']}<br>Latitud: {row['Latitud']}<br>Longitud: {row['Longitud']}<br>Tipo: {row['Tipo']}")
             ).add_to(mymap)
+    else:
+        st.button('Todo', key='btn3', on_click=select_button, args=('btn3',), use_container_width=True)
+
+
+#st.write(f"Botones seleccionados: {st.session_state.selected_buttons}")
+
 
 st.markdown("<h1 style='text-align: center;'>Mapa</h1>", unsafe_allow_html=True)
 num_clientes = df_coordenadas[df_coordenadas['Tipo'] == 'Clientes'].shape[0]
