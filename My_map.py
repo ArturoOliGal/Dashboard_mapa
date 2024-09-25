@@ -171,7 +171,7 @@ mymap.fit_bounds(bounds)
 #    ).add_to(mymap)
 
 
-filtro_ubi = st.multiselect('Filtro', ['1 km', '500 mts', 'todo'])
+filtro_km = st.multiselect('Filtro por km', ['1 km', '500 mts', 'todo'])
 
 if filtro_ubi:
     if '1 km' in filtro_ubi:
