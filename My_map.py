@@ -11,11 +11,12 @@ from folium.features import CustomIcon
 from pathlib import Path
 
 icon_path = Path("Imagenes/Isotipo_Super.png")
+image_path = 'Imagenes/Isotipo_Super.png'
+ruta_imagen = "Imagenes/ubicacion.png"  
+ruta_mapa="Imagenes/Imagen Pedregal.png"
 st.set_page_config(page_title="DENUE dashboard", page_icon=str(icon_path),layout='wide')
 st.markdown('<div id="top"></div>', unsafe_allow_html=True)
 
-ruta_imagen = "Imagenes/ubicacion.png"  
-ruta_mapa="Imagenes/Imagen Pedregal.png"
 
 @st.cache_data
 
@@ -93,7 +94,7 @@ mapa = folium.Map(
 )
 
 folium.Circle(
-    radius=500,  # 0.5 km
+    radius=500,  
     location=[latitud_cluster, longitud_cluster],
     color="blue",
     fill=True,
@@ -101,7 +102,7 @@ folium.Circle(
 ).add_to(mapa)
 
 folium.Circle(
-    radius=1000,  # 1 km
+    radius=1000,  
     location=[latitud_cluster, longitud_cluster],
     color="blue",
     fill=True,
@@ -151,7 +152,37 @@ def filtrar_por_distancia(df, centro, radio_metros):
 def filtrar_por_distancia_rango(df, centro, radio_min_metros, radio_max_metros):
     return df[df.apply(lambda row: radio_min_metros < geodesic(centro, (row['Latitud'], row['Longitud'])).meters <= radio_max_metros, axis=1)]   
 
-mymap = folium.Map(location=centro)
+
+
+map_type = st.sidebar.radio(
+    "Selecciona el tipo de mapa",
+    ( 'Mapa estándar', 'Satelital')
+)
+
+if map_type == 'Satelital':
+    tiles_option = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+    tiles_attr = 'Tiles © Esri — Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+else:
+    tiles_option = 'OpenStreetMap'
+    tiles_attr = None
+
+mymap = folium.Map(
+    location=centro,
+    zoom_start=15,
+    tiles=tiles_option,
+    attr=tiles_attr
+)
+
+icono = CustomIcon(
+    image_path, 
+    icon_size=(20, 20)  
+)
+
+folium.Marker(
+    location=centro,
+    icon=icono
+).add_to(mymap)
+
 radio_km = 1000 
 folium.Circle(location=centro, radius=radio_km, color=None, fill=True, fill_color="blue",fill_opacity=0.4).add_to(mymap)
 radio_km = 500 
@@ -168,6 +199,8 @@ def select_button(button_id):
         st.session_state.selected_buttons = ['btn3'] 
     else:
         st.session_state.selected_buttons = [button_id] 
+
+st.markdown("<h1 style='text-align: center;'>Mapa</h1>", unsafe_allow_html=True)
 
 col1, col2, col3 = st.columns(3)
 
@@ -224,8 +257,6 @@ with col3:
 
 #st.write(f"Botones seleccionados: {st.session_state.selected_buttons}")
 
-
-st.markdown("<h1 style='text-align: center;'>Mapa</h1>", unsafe_allow_html=True)
 num_clientes = df_coordenadas[df_coordenadas['Tipo'] == 'Clientes'].shape[0]
 num_generadores = df_coordenadas[df_coordenadas['Tipo'] == 'Generador'].shape[0]
 num_competencia = df_coordenadas[df_coordenadas['Tipo'] == 'Competencia'].shape[0]
