@@ -61,19 +61,30 @@ st.markdown("""
         </button>
     </a>
     """, unsafe_allow_html=True)
-filtro_ubi=st.sidebar.multiselect('Filtro',df['Ubicacion'].unique())
+filtro_ubi=st.sidebar.multiselect('Filtro para ubicación',df['Ubicacion'].unique())
 
 if filtro_ubi:
     df = df[df['Ubicacion'].isin(filtro_ubi)]
 #    catalogo_suc=catalogo_suc[catalogo_suc['Sucursal'].isin(filtro_ubi)]
 
-filtro_tipo=st.sidebar.multiselect('Filtro tipo',df['Tipo'].unique())
+filtro_tipo=st.sidebar.multiselect('Filtro de segmentación',df['Tipo'].unique())
 
 if filtro_tipo:
     df=df[df['Tipo'].isin(filtro_tipo)]
 
-filtro_descripsion_sec=st.sidebar.multiselect('Filtro descripción de sectores',df['Descripcion_del_Sector_Economico'].unique())
+filtro_descripsion_sec=st.sidebar.multiselect('Filtro descripción de sectores de la segmentación',df['Descripcion_del_Sector_Economico'].unique())
 
+map_type = st.sidebar.radio(
+    "Selecciona el tipo de mapa",
+    ( 'Mapa estándar', 'Satelital')
+)
+
+if map_type == 'Satelital':
+    tiles_option = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+    tiles_attr = 'Tiles © Esri — Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+else:
+    tiles_option = 'OpenStreetMap'
+    tiles_attr = None
 
 if filtro_descripsion_sec:
     df=df[df['Descripcion_del_Sector_Economico'].isin(filtro_descripsion_sec)]
@@ -89,14 +100,14 @@ centro = (latitud_cluster, longitud_cluster)
 mapa = folium.Map(
     location=[latitud_cluster, longitud_cluster],
     zoom_start=15,
-    tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-    attr='Tiles © Esri — Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+    tiles=tiles_option,
+    attr=tiles_attr
 )
 
 folium.Circle(
     radius=500,  
     location=[latitud_cluster, longitud_cluster],
-    color="blue",
+    color="#b5b5b5",
     fill=True,
     fill_opacity=0.3
 ).add_to(mapa)
@@ -104,7 +115,7 @@ folium.Circle(
 folium.Circle(
     radius=1000,  
     location=[latitud_cluster, longitud_cluster],
-    color="blue",
+    color="#b5b5b5",
     fill=True,
     fill_opacity=0.2
 ).add_to(mapa)
@@ -132,11 +143,11 @@ with col2:
 
 def asignar_color(tipo):
     if tipo == 'Clientes':
-        return 'green'
+        return '#0b7365'
     elif tipo == 'Generador':
-        return 'lightblue'
+        return '#1c4373'
     else:
-        return 'red'
+        return '#5e0001'
 
 def obtener_bounds(centro, radio_km):
     norte = geodesic(kilometers=radio_km).destination(centro, 0).latitude
@@ -153,18 +164,6 @@ def filtrar_por_distancia_rango(df, centro, radio_min_metros, radio_max_metros):
     return df[df.apply(lambda row: radio_min_metros < geodesic(centro, (row['Latitud'], row['Longitud'])).meters <= radio_max_metros, axis=1)]   
 
 
-
-map_type = st.sidebar.radio(
-    "Selecciona el tipo de mapa",
-    ( 'Mapa estándar', 'Satelital')
-)
-
-if map_type == 'Satelital':
-    tiles_option = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
-    tiles_attr = 'Tiles © Esri — Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
-else:
-    tiles_option = 'OpenStreetMap'
-    tiles_attr = None
 
 mymap = folium.Map(
     location=centro,
@@ -184,9 +183,9 @@ folium.Marker(
 ).add_to(mymap)
 
 radio_km = 1000 
-folium.Circle(location=centro, radius=radio_km, color=None, fill=True, fill_color="blue",fill_opacity=0.4).add_to(mymap)
+folium.Circle(location=centro, radius=radio_km, color=None, fill=True, fill_color="#b5b5b5",fill_opacity=0.4).add_to(mymap)
 radio_km = 500 
-folium.Circle(location=centro, radius=radio_km, color=None, fill=True, fill_color="blue",fill_opacity=0.6).add_to(mymap)
+folium.Circle(location=centro, radius=radio_km, color=None, fill=True, fill_color="#b5b5b5",fill_opacity=0.6).add_to(mymap)
 bounds = obtener_bounds(centro, 1) 
 mymap.fit_bounds(bounds)
 
@@ -270,9 +269,9 @@ with col1:
 with col3:
     st.markdown(
     f"""
-    <div style="background-color: lightgreen; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
-        <h4 style="text-align: center;">Clientes</h4>
-        <p style="font-size: 24px; font-weight: bold; text-align: center;">{num_clientes}</p>
+    <div style="background-color: #0b7365; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
+        <h4 style="text-align: center;color: white; ">Clientes</h4>
+        <p style="font-size: 24px; font-weight: bold; text-align: center; color: white">{num_clientes}</p>
     </div>
     """,
     unsafe_allow_html=True
@@ -281,9 +280,9 @@ with col3:
 
     st.markdown(
     f"""
-    <div style="background-color: lightblue; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
-        <h4 style="text-align: center;">Generadores</h4>
-        <p style="font-size: 24px; font-weight: bold; text-align: center;">{num_generadores}</p>
+    <div style="background-color: #1c4373; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
+        <h4 style="text-align: center; color:white;">Generadores</h4>
+        <p style="font-size: 24px; font-weight: bold; text-align: center; color:white">{num_generadores}</p>
     </div>
     """,
     unsafe_allow_html=True
@@ -292,9 +291,9 @@ with col3:
 
     st.markdown(
     f"""
-    <div style="background-color: #e60000; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
-        <h4 style="text-align: center;">Competencia</h4>
-        <p style="font-size: 24px; font-weight: bold; text-align: center;">{num_competencia}</p>
+    <div style="background-color: #5e0001; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
+        <h4 style="text-align: center; color:white">Competencia</h4>
+        <p style="font-size: 24px; font-weight: bold; text-align: center; color:white">{num_competencia}</p>
     </div>
     """,
     unsafe_allow_html=True
