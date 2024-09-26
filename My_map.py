@@ -254,7 +254,6 @@ with col3:
         st.button('Todo', key='btn3', on_click=select_button, args=('btn3',), use_container_width=True)
 
 
-#st.write(f"Botones seleccionados: {st.session_state.selected_buttons}")
 
 num_clientes = df_coordenadas[df_coordenadas['Tipo'] == 'Clientes'].shape[0]
 num_generadores = df_coordenadas[df_coordenadas['Tipo'] == 'Generador'].shape[0]
