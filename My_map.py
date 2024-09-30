@@ -13,7 +13,9 @@ from pathlib import Path
 icon_path = Path("Imagenes/Isotipo_Super.png")
 image_path = 'Imagenes/Isotipo_Super.png'
 ruta_imagen = "Imagenes/ubicacion.png"  
-ruta_mapa="Imagenes/Imagen Pedregal.png"
+ruta_mapa_pedregal="Imagenes/Imagen_Pedregal.png"
+ruta_imagen_charo="Imagenes/Imagen_Charo.png"
+ruta_imagen_beronesa="Imagenes/Imagen_Beronesa"
 st.set_page_config(page_title="DENUE dashboard", page_icon=str(icon_path),layout='wide')
 st.markdown('<div id="top"></div>', unsafe_allow_html=True)
 
@@ -33,8 +35,14 @@ def mapa_pedregal():
     
     return df
 
+def mapa_charo():
+    url="https://docs.google.com/spreadsheets/d/1VQZSrnytv0zytAWMgbkEsShxKW1qHfFw/pubhtml"
+    html=pd.read_html(url,header=1)
+    df=html[0]
+    return df
 casas_Ped=mapa_pedregal()
 df = generadore_clientes()
+casas_charo=mapa_charo()
 #weights=[1.5,1,1]
 #col1, col2, col3=st.columns(weights)
 
@@ -298,12 +306,12 @@ with col3:
     unsafe_allow_html=True
     )
 
-imagen = Image.open('Imagenes/Imagen_Pedregal.png')
+imagen_pedregal = Image.open(ruta_mapa_pedregal)
 st.markdown("<h1 style='text-align: center;'>Mapa Pedegral</h1>", unsafe_allow_html=True)
 weights=[2,1]
 col1, col2=st.columns(weights)
 with col1:
-    st.image(imagen, 
+    st.image(imagen_pedregal, 
             # caption='Imagen Pedregal',
              use_column_width=True)
 
@@ -323,4 +331,24 @@ st.markdown("""
      </footer>    
  """, unsafe_allow_html=True)
 
+st.markdown("<h1 style='text-align: center;'>Mapa Crucero Charo</h1>", unsafe_allow_html=True)
+imagen_charo = Image.open(ruta_imagen_charo)
+col1, col2=st.columns(weights)
+with col1:
+    st.image(imagen_charo, 
+            # caption='Imagen Pedregal',
+             use_column_width=True)
 
+with col2:
+    for _ in range(15):  
+        st.markdown("")
+    casas_charo = casas_charo.sort_values('Numero', ascending=True)
+    casas_charo
+
+st.markdown("<h1 style='text-align: center;'>Mapa Beronesa Charo</h1>", unsafe_allow_html=True)
+imagen_charo = Image.open(ruta_imagen_beronesa)
+col1, col2=st.columns(weights)
+with col1:
+    st.image(imagen_charo, 
+            # caption='Imagen Pedregal',
+             use_column_width=True)
