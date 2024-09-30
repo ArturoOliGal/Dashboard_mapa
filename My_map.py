@@ -15,7 +15,9 @@ image_path = 'Imagenes/Isotipo_Super.png'
 ruta_imagen = "Imagenes/ubicacion.png"  
 ruta_mapa_pedregal="Imagenes/Imagen_Pedregal.png"
 ruta_imagen_charo="Imagenes/Imagen_Charo.png"
-ruta_imagen_beronesa="Imagenes/Imagen_Beronesa"
+ruta_imagen_beronesa="Imagenes/Imagen_Beronesa.png"
+ruta_imagen_jesus_monte="Imagenes/Imagen_Jesus_monte.png"
+ruta_imagen_tenencia="Imagenes/Imagen_Tenencia_morelos.png"
 st.set_page_config(page_title="DENUE dashboard", page_icon=str(icon_path),layout='wide')
 st.markdown('<div id="top"></div>', unsafe_allow_html=True)
 
@@ -86,7 +88,61 @@ map_type = st.sidebar.radio(
     "Selecciona el tipo de mapa",
     ( 'Mapa estándar', 'Satelital')
 )
-
+st.sidebar.markdown("""
+    <a href="#pedregal">
+        <button style="bottom: 10px; center: 10px; background-color: #84817c; border: None; color: white; padding: 10px 12px; text-align: center; text-decoration: none; font-size: 16px; border-radius: 5px;">
+            <i class="bi bi-plus-lg"></i>        
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                </svg>       
+        Mapa Pedregal     
+        </button>            
+    </a>    
+    <a href="#crucero_charo">
+        <button style="bottom: 10px; center: 10px; background-color: #84817c; border: None; color: white; padding: 10px 18px; text-align: center; text-decoration: none; font-size: 16px; border-radius: 5px;">
+            <i class="bi bi-plus-lg"></i>        
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                </svg>       
+        Mapa crucero Charo     
+        </button>            
+    </a>                               
+ """, unsafe_allow_html=True)
+st.sidebar.markdown("")
+st.sidebar.markdown("""
+    <a href="#beronesa">
+        <button style="bottom: 10px; center: 10px; background-color: #84817c; border: None; color: white; padding: 10px 10px; text-align: center; text-decoration: none; font-size: 16px; border-radius: 5px;">
+            <i class="bi bi-plus-lg"></i>        
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                </svg>       
+        Mapa Beronesa     
+        </button>            
+    </a>    
+    <a href="#jesus_monte">
+        <button style="bottom: 10px; center: 10px; background-color: #84817c; border: None; color: white; padding: 10px 10px; text-align: center; text-decoration: none; font-size: 16px; border-radius: 5px;">
+            <i class="bi bi-plus-lg"></i>        
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                </svg>       
+        Mapa Jesus del monte     
+        </button>            
+    </a>                               
+ """, unsafe_allow_html=True)
+st.sidebar.markdown("")
+st.sidebar.markdown("""
+    <button style="align:center; bottom: 10px; background-color: transparent; border: none; color: white; padding: 10px 35px; text-align: center; text-decoration: none; font-size: 16px; border-radius: 5px; pointer-events: none;">
+    </button>            
+    <a href="#tenencia">
+        <button style="aling:center ;bottom: 10px; center: 10px; background-color: #84817c; border: None; color: white; padding: 10px 10px; text-align: center; text-decoration: none; font-size: 16px; border-radius: 5px;">
+            <i class="bi bi-plus-lg"></i>        
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                </svg>       
+        Mapa Tenencia Morelos     
+        </button>            
+    </a>                                
+ """, unsafe_allow_html=True)
 if map_type == 'Satelital':
     tiles_option = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
     tiles_attr = 'Tiles © Esri — Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
@@ -307,7 +363,9 @@ with col3:
     )
 
 imagen_pedregal = Image.open(ruta_mapa_pedregal)
+st.markdown('<div id="pedregal"></div>', unsafe_allow_html=True)
 st.markdown("<h1 style='text-align: center;'>Mapa Pedegral</h1>", unsafe_allow_html=True)
+
 weights=[2,1]
 col1, col2=st.columns(weights)
 with col1:
@@ -318,20 +376,9 @@ with col1:
 with col2:
     casas_Ped
 
-st.markdown("""
-     <footer style ="text-align: center">
-         <a href="#top">
-             <button style="position: fixed; bottom: 10px; center: 10px; background-color: transparent; border: None; color: white; padding: 10px 10px; text-align: center; text-decoration: none; font-size: 16px; border-radius: 50%;">
-                 <i class="bi bi-arrow-up-circle"></i>
-                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#e7276f" class="bi bi-arrow-up-circle" viewBox="0 0 16 16">
-                         <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
-                     </svg>
-             </button>
-         </a>
-     </footer>    
- """, unsafe_allow_html=True)
-
+st.markdown('<div id="crucero_charo"></div>', unsafe_allow_html=True)
 st.markdown("<h1 style='text-align: center;'>Mapa Crucero Charo</h1>", unsafe_allow_html=True)
+
 imagen_charo = Image.open(ruta_imagen_charo)
 col1, col2=st.columns(weights)
 with col1:
@@ -345,10 +392,43 @@ with col2:
     casas_charo = casas_charo.sort_values('Numero', ascending=True)
     casas_charo
 
-st.markdown("<h1 style='text-align: center;'>Mapa Beronesa Charo</h1>", unsafe_allow_html=True)
-imagen_charo = Image.open(ruta_imagen_beronesa)
+st.markdown('<div id="beronesa"></div>', unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>Mapa Beronesa</h1>", unsafe_allow_html=True)
+
+imagen_beronesa = Image.open(ruta_imagen_beronesa)
 col1, col2=st.columns(weights)
 with col1:
-    st.image(imagen_charo, 
-            # caption='Imagen Pedregal',
+    st.image(imagen_beronesa, 
              use_column_width=True)
+    
+st.markdown('<div id="jesus_monte"></div>', unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>Mapa Jesus del monte</h1>", unsafe_allow_html=True)
+
+imagen_jesus_monte = Image.open(ruta_imagen_jesus_monte)
+col1, col2=st.columns(weights)
+with col1:
+    st.image(imagen_jesus_monte, 
+             use_column_width=True)
+
+st.markdown('<div id="tenencia"></div>', unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>Mapa Tenencia Morelos</h1>", unsafe_allow_html=True)
+
+
+imagen_tenencia = Image.open(ruta_imagen_tenencia)
+col1, col2=st.columns(weights)
+with col1:
+    st.image(imagen_tenencia, 
+             use_column_width=True)
+    
+st.markdown("""
+     <footer style ="text-align: center">
+         <a href="#top">
+             <button style="position: fixed; bottom: 10px; center: 10px; background-color: transparent; border: None; color: white; padding: 10px 10px; text-align: center; text-decoration: none; font-size: 16px; border-radius: 50%;">
+                 <i class="bi bi-arrow-up-circle"></i>
+                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#e7276f" class="bi bi-arrow-up-circle" viewBox="0 0 16 16">
+                         <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
+                     </svg>
+             </button>
+         </a>
+     </footer>    
+ """, unsafe_allow_html=True)
