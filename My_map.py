@@ -169,6 +169,14 @@ mapa = folium.Map(
 )
 
 folium.Circle(
+    radius=250,  
+    location=[latitud_cluster, longitud_cluster],
+    color="#b5b5b5",
+    fill=True,
+    fill_opacity=0.3
+).add_to(mapa)
+
+folium.Circle(
     radius=500,  
     location=[latitud_cluster, longitud_cluster],
     color="#b5b5b5",
@@ -247,9 +255,11 @@ folium.Marker(
 ).add_to(mymap)
 
 radio_km = 1000 
-folium.Circle(location=centro, radius=radio_km, color=None, fill=True, fill_color="#b5b5b5",fill_opacity=0.4).add_to(mymap)
+folium.Circle(location=centro, radius=radio_km, color='#b5b5b5', fill=True, fill_color="#b5b5b5",fill_opacity=0.4).add_to(mymap)
 radio_km = 500 
-folium.Circle(location=centro, radius=radio_km, color=None, fill=True, fill_color="#b5b5b5",fill_opacity=0.6).add_to(mymap)
+folium.Circle(location=centro, radius=radio_km, color='#b5b5b5', fill=True, fill_color="#b5b5b5",fill_opacity=0.4).add_to(mymap)
+radio_km = 250 
+folium.Circle(location=centro, radius=radio_km, color='#b5b5b5', fill=True, fill_color="#b5b5b5",fill_opacity=0.4).add_to(mymap)
 bounds = obtener_bounds(centro, 1) 
 mymap.fit_bounds(bounds)
 
