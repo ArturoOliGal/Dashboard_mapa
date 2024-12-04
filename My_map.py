@@ -168,13 +168,13 @@ mapa = folium.Map(
     attr=tiles_attr
 )
 
-folium.Circle(
-    radius=250,  
-    location=[latitud_cluster, longitud_cluster],
-    color="#b5b5b5",
-    fill=True,
-    fill_opacity=0.3
-).add_to(mapa)
+#folium.Circle(
+#    radius=250,  
+#    location=[latitud_cluster, longitud_cluster],
+#    color="#b5b5b5",
+#    fill=True,
+#    fill_opacity=0.3
+#).add_to(mapa)
 
 folium.Circle(
     radius=500,  
