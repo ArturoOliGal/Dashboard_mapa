@@ -409,7 +409,7 @@ imagen_beronesa = Image.open(ruta_imagen_beronesa)
 col1, col2=st.columns(weights)
 with col1:
     st.image(imagen_beronesa, 
-             use_column_width=True)
+             use_container_width =True)
     
 st.markdown('<div id="jesus_monte"></div>', unsafe_allow_html=True)
 st.markdown("<h1 style='text-align: center;'>Mapa Jesus del monte</h1>", unsafe_allow_html=True)
@@ -418,7 +418,7 @@ imagen_jesus_monte = Image.open(ruta_imagen_jesus_monte)
 col1, col2=st.columns(weights)
 with col1:
     st.image(imagen_jesus_monte, 
-             use_column_width=True)
+             use_container_width =True)
 
 st.markdown('<div id="tenencia"></div>', unsafe_allow_html=True)
 st.markdown("<h1 style='text-align: center;'>Mapa Tenencia Morelos</h1>", unsafe_allow_html=True)
@@ -428,7 +428,7 @@ imagen_tenencia = Image.open(ruta_imagen_tenencia)
 col1, col2=st.columns(weights)
 with col1:
     st.image(imagen_tenencia, 
-             use_column_width=True)
+             use_container_width =True)
     
 st.markdown("""
      <footer style ="text-align: center">
