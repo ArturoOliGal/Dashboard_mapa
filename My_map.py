@@ -381,7 +381,7 @@ col1, col2=st.columns(weights)
 with col1:
     st.image(imagen_pedregal, 
             # caption='Imagen Pedregal',
-             use_column_width=True)
+             use_container_width =True)
 
 with col2:
     casas_Ped
@@ -394,7 +394,7 @@ col1, col2=st.columns(weights)
 with col1:
     st.image(imagen_charo, 
             # caption='Imagen Pedregal',
-             use_column_width=True)
+             use_container_width =True)
 
 with col2:
     for _ in range(15):  
